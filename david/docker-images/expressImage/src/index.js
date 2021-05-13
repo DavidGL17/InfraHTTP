@@ -24,10 +24,10 @@ function generateAnimals() {
          min: 1986, max: 2020
       });
       animals.push({
+         race: chance.animal(),
          firstName: chance.first({
             gender: gender
          }),
-         race: chance.animal(),
          gender: gender,
          birthYear: birthYear
       });
