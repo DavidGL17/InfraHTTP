@@ -1,0 +1,1 @@
+docker run -d --name apache_rp -e STATIC_APP=172.17.0.5:80 -e DYNAMIC_APP=172.17.0.8:3000 -p 8080:80 res/apache_rp
