@@ -8,12 +8,12 @@ app.get('/test', function(req, res) {
 	res.send("Hello RES - test is working");
 });
 
-app.get('/animals', function(req, res) {
+app.get('/', function(req, res) {
 	res.send( generateAnimals() );
 });
 
 //fonction appelée de base lors du d'une requete par default
-app.get('/', function(req, res) {
+app.get('/init', function(req, res) {
 	res.send("Hello RES");
 });
 
