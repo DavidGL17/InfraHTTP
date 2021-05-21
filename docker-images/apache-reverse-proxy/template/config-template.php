@@ -6,9 +6,8 @@
 ?>
 
 <Proxy 'balancer://dynamic'>
-   BalancerMember 'http://<?php print "$dynamic_app1"?>' route=1
-   BalancerMember 'http://<?php print "$dynamic_app2"?>' route=2
-   ProxySet stickysession=ROUTEID
+   BalancerMember 'http://<?php print "$dynamic_app1"?>'
+   BalancerMember 'http://<?php print "$dynamic_app2"?>'
 </Proxy>
 
 <Proxy 'balancer://static'>
