@@ -2,7 +2,7 @@
 
 ## Introduction 
 
-Ce dossier contient une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf surle fichier Dockerfile.  
+Ce dossier contient une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf sur le fichier Dockerfile.  
 
 ## Contenu
 
@@ -34,7 +34,7 @@ On peut ensuite lancer un conteneur :
 
 ## Adaptation
 
-Par rapport à la vidéo de présentation on prend la version 7.2 et non 5.6 de l'image Docker php.
+Par rapport à la vidéo de présentation on prend la version 7.2 et non 5.6 de l'image Docker php pour avoir la version la plus récente de l'image. 
 
 ## Tests
 
