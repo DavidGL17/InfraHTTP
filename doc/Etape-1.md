@@ -1,4 +1,4 @@
-# Image Apache static
+# Etape 1 : Image Apache static
 
 ## Introduction 
 
@@ -6,7 +6,7 @@ Ce dossier contient une image Docker faisant office de serveur pour lancer un si
 
 ## Contenu
 
-Le dossier contient un fichier Dockerfile pour build l'image Docker et un dossier content modifiable qui contient la structure du site web statique. Le site statique est tiré du site : https://startbootstrap.com/themes/landing-pages avec le thème suivant : https://startbootstrap.com/theme/agency . 
+Le dossier apache-php-images contient un fichier Dockerfile pour build l'image Docker et un dossier content modifiable qui contient la structure du site web statique. Le site statique est tiré du site : https://startbootstrap.com/themes/landing-pages avec le thème suivant : https://startbootstrap.com/theme/agency . 
  Dans ce sous-dossier content on retrouve la page web principale index.html et des sous-dossiers contenant les images, les feuilles de style CSS et les scripts javascript se trouvant sur cette page web. 
 
  ## Dockerfile
