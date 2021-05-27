@@ -1,8 +1,17 @@
 # 1. InfraHTTP
 
+- [1. InfraHTTP](#1-infrahttp)
+  - [1.1. Introduction](#11-introduction)
+  - [1.2. Features](#12-features)
+  - [1.3. Installation/Utilisation](#13-installationutilisation)
+  - [1.4. Structure](#14-structure)
+  - [1.5. Ajouts bonus](#15-ajouts-bonus)
+  - [1.6. Tests effectués](#16-tests-effectués)
+  - [1.7. Adaptation par rapport a la donnée](#17-adaptation-par-rapport-a-la-donnée)
+
 ## 1.1. Introduction
 
-...
+//Add intro
 
 Chaque étape est décrite dans un fichier md situé dans le dossier [doc](doc) : 
 
@@ -53,16 +62,39 @@ Pour pouvoir se connecter sur le container il faut utiliser le server name défi
 localhost serverName
 ```
 
+Après avoir fait cette modification, il suffit d'accéder à `demo.res.ch:8080/` pour accéder au site statique
+
 ## 1.4. Structure
 
 ![Structure infra](figures/structure.png)
 
 Voici ci-dessus un schéma de la structure de notre infrastructure. 
 
-## 1.5. Tests effectués
+## 1.5. Ajouts bonus
 
-Pour tester la structure finale de l'in
+Nous avons décidé de ne faire que les 2 premiers bonus, soit celui du load-balancing et celui des sticky sessions. Pour les ajouter, nous avons juste du modifier le fichier [config-template.php](docker-images/apache-reverse-proxy/template/config-template.php) pour rajouter les fonctionalités de balancing pour les serveurs dynamiques et statiques, et le sticky sessions pour les serveurs statiques. 
 
-## 1.6. Ajouts bonus
+Nous avons pris les informations du [site officiel de apache](https://httpd.apache.org/docs/2.4/en/mod/mod_proxy_balancer.html) et avons modifié notre fichier en conséquence. Nous avons aussi étendu le script de lancement du serveur reverse proxy pour pouvoir avoir 2 serveurs de chaque type. Pour ce faire nous avons juste rajouté deux variables globales pour les 2 serveurs additionels, et avont répeté le même procédé que celui présenté dans les vidéos pour récuperer l'adresse dans le fichier php.
+
+```php
+<?php
+   $static_app1 = getenv('STATIC_APP1');
+   $static_app2 = getenv('STATIC_APP2');
+   $dynamic_app1 = getenv('DYNAMIC_APP1');
+   $dynamic_app2 = getenv('DYNAMIC_APP2');
+?>
+```
+
+
+
+## 1.6. Tests effectués
+
+Pour tester la structure finale de l'interface, nous avons lancé les 5 containers comme décrit ci-dessus puis nous sommes allés modifiés légerement l'affichage pour les serveurs statiques et le contenu du rendu dans les dynamiques pour pouvoir les distinguer. 
+
+//insert images qui montrent d'abbord le serveur en mode v1, puis en mode v2
+
+Ci-dessus l'image qui s'affiche quand on se connecte au site. On peut voir que le reverse proxy nous a dirigé vers le premier serveur, qui est celui du container `apache_static1`. Si on essaie de rafraichir l'image on ne change pas de serveur, ce qui montre que le sticky session marche correctement. Si on coupe le container `apache_static1` et qu'on rafraichit la page le reverse proxy essaie de nous connecter et, une fois qu'il voit que le serveur est complétement down, nous redirige vers le deuxième. Si on relance le container `apache_static1` et qu'on rafraichit la page, le reverse proxy va nous rediriger vers le premier serveur une fois qu'il voit qu'il est de nouveau actif. Ceci montre que le load balancing et surtout le sticky sessions marchent correctement, et que la sessions survit a la disparition puis réaparition du serveur.
+
+Pour tester le load balancing sans sticky sessions nous avons utilisé les serveurs dynamqiues qui n'ont pas la fonction de sticky session activée. Cela fait que les requetes vont être répartie sur chaque serveur, en alternant a chaque requête reçue. Comme pour les serveur statiques nous avons modifié le contenu de chaque container pour afficher une id dans chaque tableau json rendu. En accédant à `demo.res.ch:8080/api/animals/` et en rafraichissant la page continuellement, on peut voir qu'on change de serveur a chaque rafraichissement (voir images ci-dessous).
 
 ## 1.7. Adaptation par rapport a la donnée
