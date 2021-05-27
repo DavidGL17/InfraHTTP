@@ -4,17 +4,19 @@
 
 ...
 
-Chaque image est décrite plus précisément dans un fichier markdown situé a la racine du dossier de l'image : 
+Chaque étape est décrite dans un fichier md situé dans le dossier [doc](doc) : 
 
-- [Image statique](docker-images/apache-php-image/apache-static.md)
-- [Image dynamique](docker-images/expressImage/express-dynamic.md)
-- [Image serveur reverse proxy](docker-images/apache-reverse-proxy/apache-reverse-proxy.md)
+- [Etape 1](doc/Etape-1.md)
+- [Etape 2](doc/Etape-2.md)
+- [Etape 3](doc/Etape-3.md)
+- [Etape 4](doc/Etape-4.md)
+- [Etape 5](doc/Etape-5.md)
 
-Chaque étape est décrite dans un fichier md situé dans le dossier [doc](doc). Pour retrouver l'état de l'étape à ce moment la dans le développement, veuillez changer de branche pour aller sur celle de l'étape de votre choix.
+Pour retrouver l'état de l'étape à ce moment la dans le développement, veuillez changer de branche pour aller sur celle de l'étape de votre choix. Il existe une branche par étape dans le repo github du laboratoire, chacune nommée comme le fichier md qui la décrit : `Etape-x`
 
 ## 1.2. Features
 
-En utilisant les 3 images que nous avons developpé notre interrface permet : 
+En utilisant les 3 images que nous avons developpé notre interface permet : 
 
 - D'offrir un site statique, qui peut être hebergé sur un ou plusieurs serveurs afin de repartir la charge.
 - D'offrir un site qui fournit du contenu dynamique. Ce site est actuellement utilisé dans le site static pour rafraichir continuellement la page. 
@@ -37,7 +39,15 @@ Puis en exécutant le script start_containers vous pourrez lancer les 4 containe
 ./start_containers.sh
 ```
 
-Il ne suffit plus qu'à lancer le container du reverse proxy pour que l'infrastructure soit fonctionnelle. 
+Il ne suffit plus qu'à lancer le container du reverse proxy pour que l'infrastructure soit fonctionnelle. Pour lancer celui ci, il faut lancer la commande : 
+
+```bash
+docker run -d --name apache_rp -e STATIC_APP1=172.17.0.2:80 -e STATIC_APP2=172.17.0.3:80 -e DYNAMIC_APP1=172.17.0.4:3000 -e DYNAMIC_APP2=172.17.0.5:3000 -p 8080:80 res/apache_rp
+```
+
+Si vous n'aviez aucun container qui tournait lorsque vous avez commencé a lancer les containers pour cette infrastructure et que vous avez lancé d'abord les deux containers statiques, les adresses IP fournies ci-dessus devraient correspondre à celles des différentes instances de vos serveurs statique et dynamiques. Pour être cependant sur qu'elles sont correctes, nous vous conseillons de vérifier d'abbord les adresses des différents containers en utilisant la commande `docker inspect container_name | grep -i ipaddr`, ce qui vous permettra de vérifier l'adresse ip de chaque container. Cette commande permet d'accéder à l'infrastructure à travers le port 8080 de votre machine locale, si vous souhaitez utiliser un port différent, vous pouvez le changer sur la commande ci-dessus.
+
+Pour pouvoir se connecter sur le container il faut utiliser le server name définit dans le [fichier de configuration php](docker-images/apache-reverse-proxy/template/config-template.php) du serveur rp.
 
 ## 1.4. Structure
 ## 1.5. Tests effectués
