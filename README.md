@@ -10,11 +10,13 @@ Chaque image est décrite plus précisément dans un fichier markdown situé a l
 - [Image dynamique](docker-images/expressImage/express-dynamic.md)
 - [Image serveur reverse proxy](docker-images/apache-reverse-proxy/apache-reverse-proxy.md)
 
+Chaque étape est décrite dans un fichier md situé dans le dossier [doc](doc). Pour retrouver l'état de l'étape à ce moment la dans le développement, veuillez changer de branche pour aller sur celle de l'étape de votre choix.
+
 ## 1.2. Features
 
 En utilisant les 3 images que nous avons developpé notre interrface permet : 
 
-- D'offrir un site statique, qui peut être hebergé sur un ou plusieurs serveurs afin de repartir la charge
+- D'offrir un site statique, qui peut être hebergé sur un ou plusieurs serveurs afin de repartir la charge.
 - D'offrir un site qui fournit du contenu dynamique. Ce site est actuellement utilisé dans le site static pour rafraichir continuellement la page. 
 - D'offrir un serveur reverse proxy, qui est capable de faire du load-balancing sur les différents serveurs disponibles, avec une implémentation en forme de sticky-session pour les serveurs statiques et round-robin pour les serveurs dynamiques.
 - D'offrir une structure complétement modulable, qui peut être personalisée pour satifaire différents besoins.
