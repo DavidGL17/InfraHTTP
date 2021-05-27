@@ -11,7 +11,15 @@ Le dossier contient un fichier Dockerfile pour build l'image Docker et un dossie
 
  ## Dockerfile
 
+ Le dockefile est le suivant :
 
+```
+FROM php:7.2-apache
+COPY content/ /var/www/html/
+```
+
+On récupère tout d'abord l'image php apache de Docker hub dans sa version 7.2 . 
+On copie ensuite le contenu du dossier content décrit ci-dessus contenant les informations liées au site statique dans le dossier /var/www/html/ de l'image Docker. 
 
 ## Installation/Utilisation
 
