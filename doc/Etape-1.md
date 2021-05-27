@@ -18,22 +18,23 @@ FROM php:7.2-apache
 COPY content/ /var/www/html/
 ```
 
-On récupère tout d'abord l'image php apache de Docker hub dans sa version 7.2 . 
+On récupère tout d'abord l'image php apache de Docker hub dans sa version 7.2 qui contient un serveur apache déjà configuré pour gérer des pages php. 
 On copie ensuite le contenu du dossier content décrit ci-dessus contenant les informations liées au site statique dans le dossier /var/www/html/ de l'image Docker. 
 
 ## Installation/Utilisation
 
 Se placer à la racine du dossier de l'image et construire l'image Docker  avec la commande :
 
-`docker build -t res/apache_rp .` 
+`docker build -t res/apache_static .` 
 
 On peut ensuite lancer un conteneur :
 
 ```docker run -p 8080:80 -d res/apache_static```
 
+
 ## Adaptation
 
-
+Par rapport à la vidée de présentation on prend la version 7.2 et non 5.6 de l'image Docker php.
 
 ## Tests
 
@@ -48,4 +49,11 @@ On entre dans le conteneur docker en fonctionnement  avec la commande :
 ```docker exec -it <nom_conteneur> /bin/bash```
 
 puis on navigue jusqu'au dossier var/www/html pour modifier le fichier index.html. On rafraîchit ensuite la page statique dans le navigateur web et on vérifie que les modifications se font bien, ce qui est le cas. 
+
+Pour pouvoir éditer des fichiers dans le conteneur qui run, on y installe nano une fois entré dans conteneur : 
+
+```
+apt-get update && \ 
+   apt-get install -y nano
+```
 
