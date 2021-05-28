@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Dans cette étape nous augmentons le serveur reverse-proxy de l'étape 3 pour que la configuration du site se face dynamiquement au lancement du container contenant le reverse proxy.
+Dans cette étape nous augmentons le serveur reverse-proxy de l'étape 3 pour que la configuration du site se fasse dynamiquement au lancement du container contenant le reverse proxy.
 
 ## Contenu
 

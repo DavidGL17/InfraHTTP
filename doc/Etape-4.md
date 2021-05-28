@@ -24,7 +24,10 @@ Les dockerfiles n'ont pas été modifiés par rapport aux autres étapes.
 
 ## Installation/Utilisation
 
-Dans un premier temps, on lance un conteneur de l'image Docker contenant le serveur statique :
+  On s'assure qu'il n'y a aucun autre conteneur actif pour qu'au lancement des conteneurs qui vont suivre la distributions des adresse IP se fasse correctement tel que marqué dans le fichier de configuration. 
+
+ Dans un premier temps, on lance un conteneur de l'image Docker contenant le serveur statique :
+
 
 ```docker run -d res/apache_static```
 
