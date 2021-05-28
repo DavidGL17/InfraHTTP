@@ -30,9 +30,9 @@ Le premier RUN active dans le conteneur les modules apache nécessaires au bon f
 Le deuxième RUN active dans le conteneur tous les fichiers dans /etc/apache2/sites-available qui commencent par 000- ou 001- soit les fichiers de configuration générale et ceux du serveur reverse proxy.   
 
 
- ## Installation/Utilisation
+## Installation/Utilisation
 
- On s'assure qu'il n'y a aucun autre conteneur actif pour qu'au lancement des conteneurs qui vont suivre la distributions des adresse IP se fasse correctement tel que marqué dans le fichier de configuration. 
+On s'assure qu'il n'y a aucun autre conteneur actif pour qu'au lancement des conteneurs qui vont suivre la distributions des adresse IP se fasse correctement tel que marqué dans le fichier de configuration. 
  
 Dans un premier temps, on lance un conteneur de l'image Docker contenant le serveur statique :
 
