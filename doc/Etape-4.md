@@ -3,14 +3,17 @@
 ## Introduction
 
 L'objectif de cette étape est d'implémenter une requête Ajax à l'aide de la librairie JQuery. 
+
 Des requête Ajax sont envoyé en arrière plan depuis un client vers le serveur dynamique pour récupérer des données et mettre à jour la page statique. Un élément de la page statique sera régulièrement mis à jour et son texte est remplacé par des informations aléatoires sur un animal, généré par un script javascript. Nous créons ainsi une injection Ajax dans la page statique. 
 
 Par rapport aux étapes précédentes, le contenu de l'image php a été changé dans le but d'avoir un site dont la structure facilite les injections Jquery et donc plus simple à gérer.
 
 ## Contenu
 
-On ajoute un nouveau script javascript pour générer aléatoirement un tableau d'animaux, tel que décrit dans l'étape 2. Ce script se trouve à l'emplacement /apache-php-image/content/js/animals.js .
+On ajoute un nouveau script javascript pour générer aléatoirement un tableau d'animaux, tel que décrit dans l'étape 2. Ce script se trouve à l'emplacement /apache-php-image/content/js/animals.js. On ajoute simplement au script la fonction setInterval permettant de de charger de nouvelles données aléatoires toutes les deux secondes.
+
 On modifie aussi la page html se trouvant à l'emplacement /apache-php-image/content/index.html pour y ajouter une référence au script au bas de la page :
+
 ```
 <script src="js/animals.js"></script>
 ```
@@ -47,3 +50,10 @@ Le script animals.js est légèrement différent car on ne reçoit pas les même
 
  ## Tests
 
+On lance les trois conteneurs.
+
+On ouvre un navigateur web et on entre pour charger le site statique :
+
+``` demo.res.ch:8080/```
+
+La page contenant le site statique se charge normalement et le contenu se charge toutes les 2 secondes avec de nouvelles données aléatoires pour les animaux. 
