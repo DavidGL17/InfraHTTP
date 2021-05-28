@@ -2,11 +2,12 @@
 
 ## Introduction 
 
-Ce dossier contient une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf sur le fichier Dockerfile.  
+Dans cette étape, nous allons configurer un serveur http statique à l'aide d'une image Docker.
+Le dossier correspondant à cette étape contient une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf sur le fichier Dockerfile.  
 
 ## Contenu
 
-Le dossier apache-php-images contient un fichier Dockerfile pour build l'image Docker et un dossier content modifiable qui contient la structure du site web statique. Le site statique est tiré du site : https://startbootstrap.com/themes/landing-pages avec le thème suivant : https://startbootstrap.com/theme/agency . 
+Le dossier apache-php-images contient un fichier Dockerfile pour build l'image Docker et un dossier content modifiable qui contient la structure du site web statique. Le site statique est tiré du site : https://startbootstrap.com/themes/landing-pages avec le thème suivant : https://startbootstrap.com/theme/agency. 
  Dans ce sous-dossier content on retrouve la page web principale index.html et des sous-dossiers contenant les images, les feuilles de style CSS et les scripts javascript se trouvant sur cette page web. 
 
  ## Dockerfile
