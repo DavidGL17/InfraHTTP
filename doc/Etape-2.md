@@ -9,19 +9,20 @@ Ce dossier contient une image Docker faisant office de serveur pour lancer un si
 ## Contenu
 
 Le dossier express-images contient un fichier Dockerfile pour build l'image Docker. On y trouve également un dossier src contenant le script javascript et les fichiers package indiquant les paquets nécessaires à installer à Node ainsi qu'un autre dossier nodes_modules contenant tous les paquets Node. 
+
 Le script index.js génère un tableau contenant des informations sur des animaux. Le nombre d'animaux du tableau est généré aléatoirement entre 0 et 10. Les informations données sur les animaux sont l'espèce, l'année de naissance et le nom. Ces données aléatoire sont générées grâce à Chance qui est un générateur aléatoire de données définies. Pour pouvoir utiliser Chance on l'ajoute simplement au fichier package-lock.json.
 
- ## Dockerfile
+## Dockerfile
 
- ```
+```
 FROM node:14.16.1
 COPY src /opt/app
 CMD ["node", "/opt/app/index.js"]
- ```
+```
 
- On récupère tout d'abord l'image node de Docker hub dans sa version 14.16.1. On utilise une version stable de Node.js.  
+On récupère tout d'abord l'image node de Docker hub dans sa version 14.16.1. On utilise une version stable de Node.js.  
 
- ## Installation/Utilisation
+## Installation/Utilisation
 
 Se placer à la racine du dossier de l'image et construire l'image Docker  avec la commande :
 
@@ -33,11 +34,11 @@ On peut ensuite lancer un conteneur :
 
 On expose le port 8080 du conteneur sur le port 3000 de la machine locale pour pouvoir y accéder depuis la machine locale et pouvoir tester plus tard dans le navigateur.
 
- ## Adaptation
+## Adaptation
 
 Par rapport à la vidéo de présentation on prend la version 14.16.1 de l'image Docker node et non 4.4 pour avoir une version plus récente de l'image.
 
- ## Tests
+## Tests
 
 On ouvre un navigateur web et on entre :
 
@@ -57,4 +58,3 @@ Pour pouvoir éditer des fichiers dans le conteneur qui run, on y installe nano 
 apt-get update && \ 
    apt-get install -y nano
 ```
-
