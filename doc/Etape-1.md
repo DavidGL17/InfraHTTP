@@ -3,7 +3,7 @@
 ## Introduction 
 
 Dans cette étape, nous allons configurer un serveur http statique à l'aide d'une image Docker.
-Le dossier correspondant à cette étape se trouve une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf sur le fichier Dockerfile.  
+Dans le dossier correspondant à cette étape se trouve une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf sur le fichier Dockerfile.  
 
 ## Contenu
 
