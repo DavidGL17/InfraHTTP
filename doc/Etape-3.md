@@ -74,4 +74,3 @@ Le tableau contenant un nombre aléatoire d'animaux se charge et les données ai
 Etant donné que les ports des serveurs statiques et dynamiques n'ont pas été exposés, on ne peut pas y accéder directement et on doit obligatoirement passer par le serveur reverse proxy.
 
 Cette configuration est fragile car dès lors qu'on expose les ports des conteneurs des serveurs statiques et dynamiques, on peut de nouveau y accéder directement via un navigateur web comme aux étapes 1 et 2. 
-

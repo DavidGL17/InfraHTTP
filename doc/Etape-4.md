@@ -18,15 +18,15 @@ On modifie aussi la page html se trouvant à l'emplacement /apache-php-image/con
 <script src="js/animals.js"></script>
 ```
 
- ## Dockerfile
+## Dockerfile
 
- Les dockerfiles n'ont pas été modifiés par rapport aux autres étapes. 
+Les dockerfiles n'ont pas été modifiés par rapport aux autres étapes. 
 
- ## Installation/Utilisation
+## Installation/Utilisation
 
- Dans un premier temps, on lance un conteneur de l'image Docker contenant le serveur statique :
+Dans un premier temps, on lance un conteneur de l'image Docker contenant le serveur statique :
 
- ```docker run -d res/apache_static```
+```docker run -d res/apache_static```
 
 On lance ensuite un conteneur de l'image Docker contenant le serveur dynamique :
 
@@ -44,11 +44,11 @@ On expose le port 8080 du conteneur sur le port 80 de la machine locale pour pou
 
 Nous avons donc maintenant trois conteneurs lancés. 
 
- ## Adaptation
+## Adaptation
 
 Le script animals.js est légèrement différent car on ne reçoit pas les mêmes informations du serveur dynamique que dans la démonstration et qu'on ne l'injecte pas au même endroit dans la page html.
 
- ## Tests
+## Tests
 
 On lance les trois conteneurs.
 
