@@ -7,6 +7,8 @@
   - [1.4. Structure](#14-structure)
   - [1.5. Ajouts bonus](#15-ajouts-bonus)
   - [1.6. Tests effectués](#16-tests-effectués)
+    - [1.6.1. Tests des sites statiques](#161-tests-des-sites-statiques)
+    - [1.6.2. Tests des sites dynamiques](#162-tests-des-sites-dynamiques)
   - [1.7. Adaptation par rapport a la donnée](#17-adaptation-par-rapport-a-la-donnée)
 
 ## 1.1. Introduction
@@ -85,16 +87,28 @@ Nous avons pris les informations du [site officiel de apache](https://httpd.apac
 ?>
 ```
 
-
-
 ## 1.6. Tests effectués
 
-Pour tester la structure finale de l'interface, nous avons lancé les 5 containers comme décrit ci-dessus puis nous sommes allés modifiés légerement l'affichage pour les serveurs statiques et le contenu du rendu dans les dynamiques pour pouvoir les distinguer. 
+Pour tester la structure finale de l'interface, nous avons lancé les 5 containers comme décrit ci-dessus puis nous sommes allés modifiés légerement l'affichage pour les serveurs statiques et le contenu du rendu dans les dynamiques pour pouvoir les distinguer. Ceci nous permet de tester le fonctionnement de notre reverse proxy et du sticky session avec les serveurs statiques, et du load balancing avec les serveur dynamiques. On peut aussi vérifier le fonctionnement de ces 2 types de serveurs au même moment.
 
-//insert images qui montrent d'abbord le serveur en mode v1, puis en mode v2
+### 1.6.1. Tests des sites statiques
 
-Ci-dessus l'image qui s'affiche quand on se connecte au site. On peut voir que le reverse proxy nous a dirigé vers le premier serveur, qui est celui du container `apache_static1`. Si on essaie de rafraichir l'image on ne change pas de serveur, ce qui montre que le sticky session marche correctement. Si on coupe le container `apache_static1` et qu'on rafraichit la page le reverse proxy essaie de nous connecter et, une fois qu'il voit que le serveur est complétement down, nous redirige vers le deuxième. Si on relance le container `apache_static1` et qu'on rafraichit la page, le reverse proxy va nous rediriger vers le premier serveur une fois qu'il voit qu'il est de nouveau actif. Ceci montre que le load balancing et surtout le sticky sessions marchent correctement, et que la sessions survit a la disparition puis réaparition du serveur.
+![Connecté au serveur 1](figures/apachePhpStaticStickySession1.png)
 
-Pour tester le load balancing sans sticky sessions nous avons utilisé les serveurs dynamqiues qui n'ont pas la fonction de sticky session activée. Cela fait que les requetes vont être répartie sur chaque serveur, en alternant a chaque requête reçue. Comme pour les serveur statiques nous avons modifié le contenu de chaque container pour afficher une id dans chaque tableau json rendu. En accédant à `demo.res.ch:8080/api/animals/` et en rafraichissant la page continuellement, on peut voir qu'on change de serveur a chaque rafraichissement (voir images ci-dessous).
+Ci-dessus l'image qui s'affiche quand on se connecte au site. On peut voir que le reverse proxy nous a dirigé vers le premier serveur, qui est celui du container `apache_static1`. Si on essaie de rafraichir l'image on ne change pas de serveur, ce qui montre que le sticky session marche correctement. Si on coupe le container `apache_static1` en faisant `docker kill apache_static1` et qu'on rafraichit la page le reverse proxy essaie de nous connecter et, une fois qu'il voit que le serveur est complétement down, nous redirige vers le deuxième (voir image ci-dessous). 
+
+![Connecté au serveur 2](figures/apachePhpStaticStickySession2.png)
+
+Si on relance le container `apache_static1` en faisant `docker restart apache_static1` et qu'on rafraichit la page, le reverse proxy va nous rediriger vers le premier serveur une fois qu'il voit qu'il est de nouveau actif. Ceci montre que le load balancing et surtout le sticky sessions marchent correctement, et que la sessions survit a la disparition puis réaparition du serveur.
+
+### 1.6.2. Tests des sites dynamiques
+
+Pour tester le load balancing sans sticky sessions nous avons utilisé les serveurs dynamqiues qui n'ont pas la fonction de sticky session activée. Cela fait que les requetes vont être répartie sur chaque serveur, en alternant a chaque requête reçue. Comme pour les serveur statiques nous avons modifié le contenu de chaque container pour afficher une id dans chaque tableau json rendu. Puis, pour forcer le relancement de l'application javascript, nous avons fait d'abbord un `docker kill expressX` puis un `docker restart expressX` sur les deux containers express. En accédant à `demo.res.ch:8080/api/animals/` et en rafraichissant la page continuellement, on peut voir qu'on change de serveur a chaque rafraichissement (voir images ci-dessous).
+
+![Connecté au serveur 1](figures/expressExampleLoadBalancing1.png)
+
+Si on rafrachit la page a nouveau on peut voir qu'on se connecte sur le deuxoème swerveur (l'attribut version passe de 1 a 2).
+
+![Connecté au serveur 2](figures/expressExampleLoadBalancing2.png)
 
 ## 1.7. Adaptation par rapport a la donnée
