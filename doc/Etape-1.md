@@ -3,16 +3,18 @@
 ## Introduction 
 
 Dans cette étape, nous allons configurer un serveur http statique à l'aide d'une image Docker.
+
 Dans le dossier correspondant à cette étape se trouve une image Docker faisant office de serveur pour lancer un site statique. On utilise un serveur apache httpd "dockerisé" servant du contenu statique. La structure du site se trouve dans le dossier content et est modifiable par l'utilisateur. Toute modification à l'extérieur du dossier content n'impactera pas l'image php, sauf sur le fichier Dockerfile.  
 
 ## Contenu
 
-Le dossier apache-php-images contient un fichier Dockerfile pour build l'image Docker et un dossier content modifiable qui contient la structure du site web statique. Le site statique est tiré du site : https://startbootstrap.com/themes/landing-pages avec le thème suivant : https://startbootstrap.com/theme/agency. 
- Dans ce sous-dossier content on retrouve la page web principale index.html et des sous-dossiers contenant les images, les feuilles de style CSS et les scripts javascript se trouvant sur cette page web. 
+Le dossier apache-php-images contient un fichier Dockerfile pour build l'image Docker et un dossier content modifiable qui contient la structure du site web statique. Le site statique est tiré du site : https://startbootstrap.com/themes/landing-pages avec le thème suivant : https://startbootstrap.com/theme/landing-page. 
 
- ## Dockerfile
+Dans ce sous-dossier content on retrouve la page web principale index.html et des sous-dossiers contenant les images, les feuilles de style CSS et les scripts javascript se trouvant sur cette page web. 
 
- Le dockerfile est le suivant :
+## Dockerfile
+
+Le dockerfile est le suivant :
 
 ```
 FROM php:7.2-apache
@@ -20,6 +22,7 @@ COPY content/ /var/www/html/
 ```
 
 On récupère tout d'abord l'image php apache de Docker hub dans sa version 7.2 qui contient un serveur apache déjà configuré pour gérer des pages php. 
+
 On copie ensuite le contenu du dossier content décrit ci-dessus contenant les informations liées au site statique dans le dossier /var/www/html/ de l'image Docker. 
 
 ## Installation/Utilisation
@@ -55,8 +58,7 @@ puis on navigue jusqu'au dossier var/www/html pour modifier le fichier index.htm
 
 Pour pouvoir éditer des fichiers dans le conteneur qui run, on y installe nano une fois entré dans conteneur : 
 
-```
+```bash
 apt-get update && \ 
    apt-get install -y nano
 ```
-
