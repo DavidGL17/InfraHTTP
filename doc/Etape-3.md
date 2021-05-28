@@ -7,7 +7,7 @@ Nous démarrerons 3 conteneurs : le serveur statique, le serveur dynamic et le r
 
 ## Contenu
 
-Le dossier apache-reverse-proxy contient un dossier conf/sites-available avec deux fichiers de configuration qui seront copié dans l'image Docker (voir Dockerfile). Le fichier 000-default.conf contient la configuration générale de l'image Docker et le fichiers 001-reverse-proxy.conf indique la configuration du serveur reverse proxy.
+Le dossier apache-reverse-proxy contient un dockerfile et un dossier conf/sites-available avec deux fichiers de configuration qui seront copié dans l'image Docker (voir Dockerfile). Le fichier 000-default.conf contient la configuration générale de l'image Docker et le fichiers 001-reverse-proxy.conf indique la configuration du serveur reverse proxy.
 
  ## Dockerfile
 
@@ -28,7 +28,46 @@ Le premier RUN active dans le conteneur les modules apache nécessaires au bon f
 Le deuxième RUN active dans le conteneur tous les fichiers dans /etc/apache2/sites-available qui commencent par 000- ou 001- soit les fichiers de configuration générale et ceux du serveur reverse proxy.   
 
  ## Installation/Utilisation
+ 
+ Dans un premier temps, on lance un conteneur de l'image Docker contenant le serveur statique :
+
+ ```docker run -d res/apache_static```
+
+On lance ensuite un conteneur de l'image Docker contenant le serveur dynamique :
+
+```docker run -d res/express```
+
+On se place à la racine du dossier de l'image Docker du serveur reverse proxy et on construit l'image avec la commande suivante :
+
+`docker build -t res/apache_rp .` 
+
+Enfin, on lance un conteneur de l'image Docker du serveur reverse proxy :
+
+```docker run -p 8080:80 -d res/apache_rp```
+
+On expose le port 8080 du conteneur sur le port 80 de la machine locale pour pouvoir y accéder depuis la machine locale et pouvoir tester plus tard dans le navigateur.
+
+Nous avons donc maintenant trois conteneurs lancés. 
 
  ## Adaptation
 
+ Par rapport à la vidéo de présentation on prend la version 7.2 et non 5.6 de l'image Docker php pour avoir la version la plus récente de l'image. 
+
  ## Tests
+
+On ouvre un navigateur web et on entre pour charger le site statique :
+
+``` demo.res.ch:8080/```
+
+La page contenant le site statique se charge normalement.
+
+Pour charger le contenu dynamique on entre :
+
+``` demo.res.ch:8080/api/animals/```
+
+Le tableau contenant un nombre aléatoire d'animaux se charge et les données ainsi que la taille du tableau varie aléatoirement quand on recharge la page.
+
+Etant donné que les ports des serveurs statiques et dynamiques n'ont pas été exposés, on ne peut pas y accéder directement et on doit obligatoirement passer par le serveur reverse proxy.
+
+Cette configuration est fragile car dès lors qu'on expose les ports des conteneurs des serveurs statiques et dynamiques, on peut de nouveau y accéder directement via un navigateur web comme aux étapes 1 et 2. 
+
