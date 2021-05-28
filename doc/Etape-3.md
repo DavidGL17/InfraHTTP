@@ -55,6 +55,8 @@ Nous avons donc maintenant trois conteneurs lancés.
 
  ## Tests
 
+ On lance les trois conteneurs.
+
 On ouvre un navigateur web et on entre pour charger le site statique :
 
 ``` demo.res.ch:8080/```
