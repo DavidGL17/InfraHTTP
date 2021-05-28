@@ -10,18 +10,19 @@
     - [1.6.1. Tests des sites statiques](#161-tests-des-sites-statiques)
     - [1.6.2. Tests des sites dynamiques](#162-tests-des-sites-dynamiques)
   - [1.7. Adaptation par rapport a la donnée](#17-adaptation-par-rapport-a-la-donnée)
+  - [1.8 Conclusion](#18-conclusion)
 
 ## 1.1. Introduction
 
-//Add intro
+Dans ce rapport, nous allons décrire l'état actuel de notre infrastructure, et expliquer les diférentes parties qui la composent. Puis nous allons expliquer quels bonus nous avons décidé d'implémenter et comment, et montrerons comment nous avons vérifié le fonctionnement des différentes parties de l'interface, en nous concentrant surtout sur le test des deux parties bonus. Nous mentionerons les différents changements que nous avons du apporter par rapport aux vidéos fournies, et finirons par une conclusion.
 
-Chaque étape est décrite dans un fichier md situé dans le dossier [doc](doc) : 
+Ce rapport ne s'occupe que de la description de l'état de notre infrastructure à la fin du développement. Nous avons décrit chaque étape telle qu'elle l'était à la fin de son développement dans un fichier md situé dans le dossier [doc](doc) : 
 
-- [Etape 1](doc/Etape-1.md)
-- [Etape 2](doc/Etape-2.md)
-- [Etape 3](doc/Etape-3.md)
-- [Etape 4](doc/Etape-4.md)
-- [Etape 5](doc/Etape-5.md)
+- [Etape-1](doc/Etape-1.md)
+- [Etape-2](doc/Etape-2.md)
+- [Etape-3](doc/Etape-3.md)
+- [Etape-4](doc/Etape-4.md)
+- [Etape.5](doc/Etape-5.md)
 
 Pour retrouver l'état de l'étape à ce moment la dans le développement, veuillez changer de branche pour aller sur celle de l'étape de votre choix. Il existe une branche par étape dans le repo github du laboratoire, chacune nommée comme le fichier md qui la décrit : `Etape-x`
 
@@ -107,8 +108,14 @@ Pour tester le load balancing sans sticky sessions nous avons utilisé les serve
 
 ![Connecté au serveur 1](figures/expressExampleLoadBalancing1.png)
 
-Si on rafrachit la page a nouveau on peut voir qu'on se connecte sur le deuxoème swerveur (l'attribut version passe de 1 a 2).
+Si on rafrachit la page a nouveau on peut voir qu'on se connecte sur le deuxième serveur (l'attribut version passe de 1 a 2).
 
 ![Connecté au serveur 2](figures/expressExampleLoadBalancing2.png)
 
 ## 1.7. Adaptation par rapport a la donnée
+
+Nous parlons de ces détails plus précisément dans le rapport de chaque étape. En général, nous avons du prendre des versions d'images docker ou de programmes comme node plus récentes que celles montrées dans les vidéos, qui étaient toutes vieilles d'au moins 5 ans. Nous avons aussi du adapter le script du serveur express et le site statique pour ne pas avoir la même chose que ceux de l'exemple dans les vidéos. Nous avons décidé de garder le même concept de liste, mais de renvoyer une liste d'animaux au lieu d'humains. Ceci nous a permit de satisfaire les demandes de la donnée tout en restant simple et faisable par des personnes n'ayant jamais fait de javascript auparavant.
+
+## 1.8 Conclusion 
+
+Ce laboratoire fut très intéressant malgrès le fait que nous avons du passer beaucoup plus de temps que prévu pour réaliser les étapes données (~13-15h pour les étapes 1 à 5). Il nous a permit d'apprendre la structure et l'utilisation d'un serveur reverse proxy, et nous a permis de découvrir deux langages de programmation, javascript et php, que nous n'avions jamais utilisé auparavant. 
