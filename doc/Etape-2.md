@@ -19,10 +19,42 @@ COPY src /opt/app
 CMD ["node", "/opt/app/index.js"]
  ```
 
- On récpuère tout d'abord l'image node de Docker hub dans sa version 14.16.1. On utilise une version stable de Node.js.  
+ On récupère tout d'abord l'image node de Docker hub dans sa version 14.16.1. On utilise une version stable de Node.js.  
 
  ## Installation/Utilisation
 
+Se placer à la racine du dossier de l'image et construire l'image Docker  avec la commande :
+
+`docker build -t res/express .` 
+
+On peut ensuite lancer un conteneur :
+
+```docker run -p 8080:3000 -d res/express```
+
+On expose le port 8080 du conteneur sur le port 3000 de la machine locale pour pouvoir y accéder depuis la machine locale et pouvoir tester plus tard dans le navigateur.
+
  ## Adaptation
 
+Par rapport à la vidéo de présentation on prend la version 14.16.1 de l'image Docker node et non 4.4 pour avoir une version plus récente de l'image.
+
  ## Tests
+
+On ouvre un navigateur web et on entre :
+
+``` localhost:8080``` 
+
+Le tableau d'animaux s'affiche et quand on rafraîchit le tableau se remplit avec de nouvelles valeurs aléatoires. Le nombre d'animaux varie aussi aléatoirement entre 0 et 10. 
+
+On entre dans le conteneur docker en fonctionnement  avec la commande :
+
+```docker exec -it <nom_conteneur> /bin/bash```
+
+puis on navigue jusqu'au dossier /opt/app pour modifier le fichier index.js avec nano. On rafraîchit ensuite la page statique dans le navigateur web et on vérifie que les modifications se font bien, ce qui est le cas. 
+
+Pour pouvoir éditer des fichiers dans le conteneur qui run, on y installe nano une fois entré dans conteneur : 
+
+```
+apt-get update && \ 
+   apt-get install -y nano
+```
+

@@ -31,6 +31,8 @@ On peut ensuite lancer un conteneur :
 
 ```docker run -p 8080:80 -d res/apache_static```
 
+On expose le port 8080 du conteneur sur le port 80 de la machine locale pour pouvoir y accéder depuis la machine locale et pouvoir tester plus tard dans le navigateur.
+
 
 ## Adaptation
 
@@ -48,7 +50,7 @@ On entre dans le conteneur docker en fonctionnement  avec la commande :
 
 ```docker exec -it <nom_conteneur> /bin/bash```
 
-puis on navigue jusqu'au dossier var/www/html pour modifier le fichier index.html. On rafraîchit ensuite la page statique dans le navigateur web et on vérifie que les modifications se font bien, ce qui est le cas. 
+puis on navigue jusqu'au dossier var/www/html pour modifier le fichier index.html avec nano. On rafraîchit ensuite la page statique dans le navigateur web et on vérifie que les modifications se font bien, ce qui est le cas. 
 
 Pour pouvoir éditer des fichiers dans le conteneur qui run, on y installe nano une fois entré dans conteneur : 
 
